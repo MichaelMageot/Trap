@@ -1,0 +1,51 @@
+#grid {
+  height: 330px;
+  width: 330px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: solid white 1px;
+}
+
+div {
+  height: 20px;
+  width: 20px;
+  background-color: lightblue;
+  border: solid white 1px;
+}
+
+.trapBoard {
+  background-color: green;
+}
+
+.board {
+  background-color: black;
+}
+
+.contVert {
+  background-color: grey;
+}
+
+.contHor {
+  background-color: lightgrey;
+}
+
+.cont {
+  background-color: black;
+}
+
+.horHoles {
+  background-color: violet;
+  border-radius: 10px;
+}
+
+.vertHoles {
+  background-color: rgb(126, 23, 74);
+  border-radius: 10px;
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  clip-path: circle(40%);
+}
+/* © copyright Michaël Mageot all right reserved */
