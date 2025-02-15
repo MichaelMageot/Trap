@@ -89,4 +89,3 @@ document.addEventListener("DOMContentLoaded", () => {
   
 });
 
-/* © copyright Michaël Mageot all right reserved */
