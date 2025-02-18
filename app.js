@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
   var randomVertHole = [];
   var randomHorHole = [];
 
+  function getRandomNumber(number){
+    return Math.floor(Math.random() * number);
+  }
+
   /* grid's creation */
 
   for (let i = 0; i < 225; i++) {
@@ -55,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   for (let x = 0; x < (7 * 7) / 2; x++) {
-    randomHorHole.push(horGrid[Math.floor(Math.random() * horGrid.length)]);
+    randomHorHole.push(horGrid[getRandomNumber(horGrid.length)]);
     square[randomHorHole[x]].classList.add("horHoles");
   }
   
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   for (let x = 0; x < (7 * 7) / 2; x++) {
-    randomVertHole.push(vertGrid[Math.floor(Math.random() * vertGrid.length)]);
+    randomVertHole.push(vertGrid[getRandomNumber(vertGrid.length)]);
     square[randomVertHole[x]].classList.add("vertHoles");
   }
 
@@ -82,7 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* add controller */
 
-  /* Horyzontal controller */
+  var randomPosition = [];
+
+  for (let i = 0; i < 14; i++) {
+    var contPosition = getRandomNumber(3);
+    randomPosition.push(contPosition);
+  }
+
+  /* verticale controller */
+
+  /* get verticale controller */
+
+  
 
   
 
