@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const width = 15;
   const border = 3;
+  const board = 7;
   const trapBorder = border + 1;
 
   var horGrid = [];
@@ -86,21 +87,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* add controller */
 
-  var randomPosition = [];
+  var randomVertContPosition = [];
+  var randomHorContPosition = [];
 
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 7; i++) {
     var contPosition = getRandomNumber(3);
-    randomPosition.push(contPosition);
+    randomVertContPosition.push(contPosition);
+  }
+
+  for (let i = 0; i < 7; i++) {
+    var contPosition = getRandomNumber(3);
+    randomHorContPosition.push(contPosition);
   }
 
   /* verticale controller */
 
   /* get verticale controller */
 
+  let vertCont = []
+
+  for (let j = 0; j < border; j++) {
+    for ( let i = trapBorder; i < (width - trapBorder); i++ ) {
+      vertCont.push(square[i + j * width]);
+    }
+  }
   
+  for (let j = width - border; j < width; j++) {
+    for ( let i = trapBorder; i < width - trapBorder; i++ ) {
+      vertCont.push(square[i + j * width]);
+    }
+  }
+
+  /* color vertical controler in red */
+
+  for(let x = 0; x < 7; x++){
+    if(randomVertContPosition[x] == 0){
+      vertCont[x].setAttribute("class", "red");
+      vertCont[x + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
+    }
+    if(randomVertContPosition[x] == 1){
+      vertCont[x + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7 + 7].setAttribute("class", "red");
+    }
+    if(randomVertContPosition[x] == 2){
+      vertCont[x + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 7 + 7 + 7 + 7 + 7].setAttribute("class", "red");
+    }
+  }
+
+  /* horizontal controller */
+
+  /* get horizontal controller */
+
+  let horCont = []
+
+  for(let x = trapBorder * width; x < trapBorder * width + 3; x++){
+    for(let y = 0; y < width - 2 * trapBorder; y++){
+      horCont.push(square[x + y * width])
+    }
+  }
+  
+  for(let x = (width - border); x < (width - border) + 3; x++){
+    for(let y = trapBorder; y < trapBorder + board; y++){
+      horCont.push(square[x + y * width])
+    }
+  }
+
+  /* color vertical controler in yellow */
+
+  for(let x = 0; x < 7; x++){
+    if(randomHorContPosition[x] == 0){
+      horCont[x].setAttribute("class", "yellow");
+      horCont[x + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
+    }
+    if(randomHorContPosition[x] == 1){
+      horCont[x + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
+    }
+    if(randomHorContPosition[x] == 2){
+      horCont[x + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 7 + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
+    }
+  }
+  
+  /* add event on controller */
+  
+  /* get vertical controller */
+
 
   
 
-  
+
+
+
 });
 

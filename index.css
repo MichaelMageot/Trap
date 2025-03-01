@@ -48,3 +48,11 @@ div {
   height: 20px;
   clip-path: circle(40%);
 }
+
+.red{
+  background-color: red;
+}
+
+.yellow{
+  background-color: yellow;
+}
