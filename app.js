@@ -90,15 +90,16 @@ document.addEventListener("DOMContentLoaded", () => {
   var randomVertContPosition = [];
   var randomHorContPosition = [];
 
-  for (let i = 0; i < 7; i++) {
-    var contPosition = getRandomNumber(3);
-    randomVertContPosition.push(contPosition);
+  function fillContPosition(ranContPosition){
+    for(let i = 0; i < 7; i++){
+      var contPosition = getRandomNumber(3);
+      ranContPosition.push(contPosition)
+    }
+    return ranContPosition
   }
 
-  for (let i = 0; i < 7; i++) {
-    var contPosition = getRandomNumber(3);
-    randomHorContPosition.push(contPosition);
-  }
+  randomHorContPosition = fillContPosition(randomHorContPosition);
+  randomVertContPosition = fillContPosition(randomVertContPosition);
 
   /* verticale controller */
 
@@ -124,20 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if(randomVertContPosition[x] == 0){
       vertCont[x].setAttribute("class", "red");
       vertCont[x + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 2 * 7].setAttribute("class", "red");
+      vertCont[x + 3 * 7].setAttribute("class", "red");
     }
     if(randomVertContPosition[x] == 1){
       vertCont[x + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 2 * 7].setAttribute("class", "red");
+      vertCont[x + 3 * 7].setAttribute("class", "red");
+      vertCont[x + 4 * 7].setAttribute("class", "red");
     }
     if(randomVertContPosition[x] == 2){
-      vertCont[x + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7 + 7].setAttribute("class", "red");
-      vertCont[x + 7 + 7 + 7 + 7 + 7].setAttribute("class", "red");
+      vertCont[x + 2 * 7].setAttribute("class", "red");
+      vertCont[x + 3 * 7].setAttribute("class", "red");
+      vertCont[x + 4 * 7].setAttribute("class", "red");
+      vertCont[x + 5 * 7].setAttribute("class", "red");
     }
   }
 
@@ -147,15 +148,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let horCont = []
 
-  for(let x = trapBorder * width; x < trapBorder * width + 3; x++){
-    for(let y = 0; y < width - 2 * trapBorder; y++){
-      horCont.push(square[x + y * width])
+  for(x = 0; x < border; x++){
+    for(y = trapBorder * width; y < (width - trapBorder) * width; y += width){
+      horCont.push(square[x + y]);
     }
   }
-  
-  for(let x = (width - border); x < (width - border) + 3; x++){
-    for(let y = trapBorder; y < trapBorder + board; y++){
-      horCont.push(square[x + y * width])
+
+  for(x = width - trapBorder + 1; x < width; x++){
+    for(y = trapBorder * width; y < (width - trapBorder) * width; y += width){
+      horCont.push(square[x + y]);
     }
   }
 
@@ -165,30 +166,117 @@ document.addEventListener("DOMContentLoaded", () => {
     if(randomHorContPosition[x] == 0){
       horCont[x].setAttribute("class", "yellow");
       horCont[x + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 2 * 7].setAttribute("class", "yellow");
+      horCont[x + 3 * 7].setAttribute("class", "yellow");
     }
     if(randomHorContPosition[x] == 1){
+
       horCont[x + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 2 * 7].setAttribute("class", "yellow");
+      horCont[x + 3 * 7].setAttribute("class", "yellow");
+      horCont[x + 4 * 7].setAttribute("class", "yellow");
     }
     if(randomHorContPosition[x] == 2){
-      horCont[x + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
-      horCont[x + 7 + 7 + 7 + 7 + 7].setAttribute("class", "yellow");
+      horCont[x + 2 * 7].setAttribute("class", "yellow");
+      horCont[x + 3 * 7].setAttribute("class", "yellow");
+      horCont[x + 4 * 7].setAttribute("class", "yellow");
+      horCont[x + 5 * 7].setAttribute("class", "yellow");
     }
   }
   
   /* add event on controller */
   
-  /* get vertical controller */
+  /* vertical controller */
+  
+  for(let x = 0; x < vertCont.length; x++){
+    if(randomVertContPosition[x] == 0){
+      vertCont[x + 4 * 7].addEventListener('mousedown', () => {
+        mouveVertCont(vertCont[x + 4 * 7])
+    });
+    }
+    if(randomVertContPosition[x] == 1){
+      vertCont[x].addEventListener('mousedown', () => {
+        mouveVertCont(vertCont[x + 0 * 7])
+      });
+      vertCont[x + 5 * 7].addEventListener('mousedown', () => {
+        mouveVertCont(vertCont[x + 5 * 7])
+      });
+    }
+    if(randomVertContPosition[x] == 2){
+      vertCont[x + 1 * 7].addEventListener('mousedown', () => {
+        mouveVertCont(vertCont[x + 1 * 7])
+    });
+    }
+  }
 
+  // /* horizontal controller */
+  
+  for(let x = 0; x < horCont.length; x++){
+    if(randomHorContPosition[x] == 0){
+      horCont[x + 4 * 7].addEventListener('mousedown', () => {
+        mouveHorCont(horCont[x + 4 * 7])
+      });
+    }
+    if(randomHorContPosition[x] == 1){
+      horCont[x].addEventListener('mousedown', () => {
+        mouveHorCont(horCont[x + 0 * 7])
+      });
+      horCont[x + 5 * 7].addEventListener('mousedown', () => {
+        mouveHorCont(horCont[x + 5 * 7])
+      });
+    }
+    if(randomHorContPosition[x] == 2){
+      horCont[x + 1 * 7].addEventListener('mousedown', () => {
+        mouveHorCont(horCont[x + 1 * 7])
+    });
+    }
+  }
+
+  /* move line */
+
+  /* vertical line */
+
+  function mouveVertCont(div){
+
+    /* up side */
+    
+    if(div.id < 112){
+      if(div.id - width > 0){
+        mouvVertLineUp(div.id - width);
+      }
+      else{
+        mouvVertLineUp(div.id);
+      }
+    }
+
+
+    /* down side */
+    if(div.id > 112){
+      console.log("down");
+    }
+  }
+
+  /* horyzontal line */
 
   
+  function mouveHorCont(div){
+    /* left side */
+    if(div.id % width < width / 2){
+      console.log("left");
+    }
+    /* right side */
+    if(div.id % width > width / 2){
+      console.log("right");
+    }
+  }
 
+  function mouvVertLineUp(divid){
+    square[divid].removeEventListener('mousedown', () => {
+      mouveVertCont(square[divid]);
+    });
+    
+    console.log("ok")
+  }
 
 
 
