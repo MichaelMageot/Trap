@@ -17,6 +17,16 @@ div {
   background-color: green;
 }
 
+.horHoles {
+  background-color: violet;
+  border-radius: 10px;
+}
+
+.vertHoles {
+  background-color: rgb(126, 23, 74);
+  border-radius: 10px;
+}
+
 .board {
   background-color: black;
 }
@@ -31,16 +41,6 @@ div {
 
 .cont {
   background-color: black;
-}
-
-.horHoles {
-  background-color: violet;
-  border-radius: 10px;
-}
-
-.vertHoles {
-  background-color: rgb(126, 23, 74);
-  border-radius: 10px;
 }
 
 .dot {

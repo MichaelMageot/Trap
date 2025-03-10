@@ -267,33 +267,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function mouvVertLineUp(divid){
     if(divid - width > 0){
-    square[divid].removeEventListener('mousedown', () => {
-      mouveVertCont(square[divid]);
-    });
+      square[divid].removeEventListener('mousedown', () => {
+        mouveVertCont(square[divid]);
+      });
+    
+      square[divid].classList.add("red");
+    
+      square[divid - width].addEventListener('mousedown', () => {
+        mouveVertCont(square[divid - width]);
+      });
 
-    square[divid].classList.add("red");
-
-    square[divid - width].addEventListener('mousedown', () => {
-      mouveVertCont(square[divid - width]);
-    });
-    // square[divid + 4 * width].classList.remove("red");
-    square[Number(divid) + 13 * width].classList.remove("red");
-
-    square[Number(divid) + 13 * width].addEventListener('mousedown', () => {
-      mouveVertCont(square[Number(divid) + 13 * width]);
-    })
-
-    for(let i = 4; i <= 9; i++){
-      if(square[Number(divid) + i * width].classList.contains('vertHoles')){
-        square[Number(divid) + i * width].classList.remove('vertHoles');
-        square[Number(divid) + (i - 1) * width].classList.add('vertHoles');
+      square[Number(divid) + 13 * width].classList.remove("red");
+    
+      square[Number(divid) + 13 * width].addEventListener('mousedown', () => {
+        mouveVertCont(square[Number(divid) + 13 * width]);
+      })
+    
+      for(let i = 3; i <= 9; i++){
+        if(square[Number(divid) + i * width].classList.contains('vertHoles')){
+          square[Number(divid) + i * width].classList.remove('vertHoles');
+          square[Number(divid) + (i - 1) * width].classList.add('vertHoles');
+        }
       }
-
     }
-
-
-    }
-
   }
 
 
