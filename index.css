@@ -19,12 +19,12 @@ div {
 
 .horHoles {
   background-color: violet;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .vertHoles {
   background-color: rgb(126, 23, 74);
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .board {

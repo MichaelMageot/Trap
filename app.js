@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const width = 15;
   const border = 3;
   const board = 7;
-  const trapBorder = border + 1;
+  const trapBoard = border + 1;
 
   var horGrid = [];
   var vertGrid = [];
@@ -48,10 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* color the trapBoard in green */
 
-  for (let j = 0; j < width - 2 * trapBorder; j++) {
+  for (let j = 0; j < width - 2 * trapBoard; j++) {
     for (
-      let i = trapBorder + trapBorder * width;
-      i < trapBorder + trapBorder * width + width - 2 * trapBorder;
+      let i = trapBoard + trapBoard * width;
+      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
       i++
     ) {
       square[i + j * width].setAttribute("class", "trapBoard");
@@ -60,10 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* horGrid's creation */
 
-  for (let j = 0; j < width - 2 * trapBorder; j++) {
+  for (let j = 0; j < width - 2 * trapBoard; j++) {
     for (
-      let i = trapBorder + trapBorder * width;
-      i < trapBorder + trapBorder * width + width - 2 * trapBorder;
+      let i = trapBoard + trapBoard * width;
+      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
       i++
     ) {
       horGrid.push(i + j * width);
@@ -77,10 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* vertGrid's creation */
 
-  for (let j = 0; j < width - 2 * trapBorder; j++) {
+  for (let j = 0; j < width - 2 * trapBoard; j++) {
     for (
-      let i = trapBorder + trapBorder * width;
-      i < trapBorder + trapBorder * width + width - 2 * trapBorder;
+      let i = trapBoard + trapBoard * width;
+      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
       i++
     ) {
       vertGrid.push(i + j * width);
@@ -123,13 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let vertCont = [];
 
   for (let j = 0; j < border; j++) {
-    for (let i = trapBorder; i < width - trapBorder; i++) {
+    for (let i = trapBoard; i < width - trapBoard; i++) {
       vertCont.push(square[i + j * width]);
     }
   }
 
   for (let j = width - border; j < width; j++) {
-    for (let i = trapBorder; i < width - trapBorder; i++) {
+    for (let i = trapBoard; i < width - trapBoard; i++) {
       vertCont.push(square[i + j * width]);
     }
   }
@@ -164,13 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let horCont = [];
 
   for (x = 0; x < border; x++) {
-    for (y = trapBorder * width; y < (width - trapBorder) * width; y += width) {
+    for (y = trapBoard * width; y < (width - trapBoard) * width; y += width) {
       horCont.push(square[x + y]);
     }
   }
 
-  for (x = width - trapBorder + 1; x < width; x++) {
-    for (y = trapBorder * width; y < (width - trapBorder) * width; y += width) {
+  for (x = width - trapBoard + 1; x < width; x++) {
+    for (y = trapBoard * width; y < (width - trapBoard) * width; y += width) {
       horCont.push(square[x + y]);
     }
   }
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* down side */
     if (div.id > 112) {
-      console.log("down");
+      mouvVertLineDown(Number(div.id));
     }
   }
 
@@ -275,7 +275,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("right");
     }
   }
-
+  
+  /* mouvVertLineUp */
   function mouvVertLineUp(divid) {
     if (divid - width > 0) {
 
@@ -291,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mouveVertCont(square[divid + 13 * width]);
       }, { once: true });
 
-      for (let i = 3; i <= 9; i++) {
+      for (let i = 2; i <= 12; i++) {
         if (square[divid + i * width].classList.contains("vertHoles")) {
           square[divid + i * width].classList.remove("vertHoles");
           square[divid + (i - 1) * width].classList.add("vertHoles");
@@ -304,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mouveVertCont(square[divid + 13 * width]);
       }, { once: true });
       
-      for (let i = 3; i <= 9; i++) {
+      for (let i = 2; i <= 12; i++) {
         if (square[divid + i * width].classList.contains("vertHoles")) {
           square[divid + i * width].classList.remove("vertHoles");
           square[divid + (i - 1) * width].classList.add("vertHoles");
@@ -312,4 +313,46 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
+  
+  /* mouvVertLineDown */
+
+  function mouvVertLineDown(divid) {
+    if (divid + width < 224) {
+      square[divid].classList.add("red");
+
+      square[divid + width].addEventListener("mousedown", () => {
+        mouveVertCont(square[divid + width]);
+      }, { once: true });
+
+      square[divid - 13 * width].classList.remove("red");
+
+      square[divid - 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(square[divid - 13 * width]);
+      }, { once: true });
+
+      for (let i = 12; i >= 2; i--) {
+        if(square[divid - i * width].classList.contains("vertHoles")){
+          square[divid - i * width].classList.remove("vertHoles");
+          // square[divid - i * width + width].classList.add("vertHoles");
+        }
+      }
+    }else{
+      square[divid].classList.add("red");
+      square[divid - 13 * width].classList.remove("red");
+      square[divid - 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(square[divid - 13 * width]);
+      }, { once: true });
+      
+      for (let i = 2; i <= 12; i++) {
+        console.log(divid);
+      }
+    }
+  }
+  
+
+
+
+
+
+
 });
