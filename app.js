@@ -294,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       for (let i = 2; i <= 12; i++) {
         if (square[divid + i * width].classList.contains("vertHoles")) {
+          console.log("ok");
           square[divid + i * width].classList.remove("vertHoles");
           square[divid + (i - 1) * width].classList.add("vertHoles");
         }
@@ -330,10 +331,10 @@ document.addEventListener("DOMContentLoaded", () => {
         mouveVertCont(square[divid - 13 * width]);
       }, { once: true });
 
-      for (let i = 12; i >= 2; i--) {
+      for (let i = 1; i <= 12; i++) {
         if(square[divid - i * width].classList.contains("vertHoles")){
           square[divid - i * width].classList.remove("vertHoles");
-          // square[divid - i * width + width].classList.add("vertHoles");
+          square[divid - (i - 1) * width].classList.add("vertHoles");
         }
       }
     }else{
@@ -343,16 +344,15 @@ document.addEventListener("DOMContentLoaded", () => {
         mouveVertCont(square[divid - 13 * width]);
       }, { once: true });
       
-      for (let i = 2; i <= 12; i++) {
-        console.log(divid);
+      for (let i = 1; i <= 12; i++) {
+        if(square[divid - i * width].classList.contains("vertHoles")){
+          square[divid - i * width].classList.remove("vertHoles");
+          square[divid - (i - 1) * width].classList.add("vertHoles");
+        }
       }
     }
   }
   
-
-
-
-
 
 
 });
