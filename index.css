@@ -17,13 +17,13 @@ div {
   background-color: green;
 }
 
-.horHoles {
-  background-color: violet;
+.vertHoles {
+  background-color: rgb(126, 23, 74);
   /* border-radius: 10px; */
 }
 
-.vertHoles {
-  background-color: rgb(126, 23, 74);
+.horHoles {
+  background-color: violet;
   /* border-radius: 10px; */
 }
 
@@ -56,3 +56,13 @@ div {
 .yellow{
   background-color: yellow;
 }
+
+.marble {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  clip-path: circle(40%);
+}
+

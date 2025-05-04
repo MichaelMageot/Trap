@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
   const result = document.getElementById("result");
   const timeLeft = document.getElementById("time-left");
 
@@ -13,7 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
   var vertGrid = [];
   var randomVertHole = [];
   var randomHorHole = [];
-
+  
+  const Board = [];
+  const TrapBoard = [];
+   
   function getRandomNumber(number) {
     return Math.floor(Math.random() * number);
   }
@@ -32,72 +37,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* bring together all div */
 
-  const square = document.querySelectorAll("#grid div");
+  const squares = document.querySelectorAll("#grid div");
 
   /* color the board in black */
 
   for (let j = 0; j < width - 2 * border; j++) {
-    for (
-      let i = border + border * width;
-      i <= border + border * width + width - 2 * border - 1;
-      i++
-    ) {
-      square[i + j * width].setAttribute("class", "board");
+    for (let i = border + border * width; i <= border + border * width + width - 2 * border - 1; i++) {
+
+      squares[i + j * width].setAttribute("class", "board");
+      Board.push(squares[i + j * width]);
+      
+
     }
   }
 
   /* color the trapBoard in green */
 
   for (let j = 0; j < width - 2 * trapBoard; j++) {
-    for (
-      let i = trapBoard + trapBoard * width;
-      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
-      i++
-    ) {
-      square[i + j * width].setAttribute("class", "trapBoard");
+    for (let i = trapBoard + trapBoard * width; i < trapBoard + trapBoard * width + width - 2 * trapBoard; i++) {
+
+      squares[i + j * width].setAttribute("class", "trapBoard");
+      TrapBoard.push(squares[i + j * width]);
+
     }
   }
 
   /* horGrid's creation */
 
   for (let j = 0; j < width - 2 * trapBoard; j++) {
-    for (
-      let i = trapBoard + trapBoard * width;
-      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
-      i++
-    ) {
+    for (let i = trapBoard + trapBoard * width; i < trapBoard + trapBoard * width + width - 2 * trapBoard; i++) {
+
       horGrid.push(i + j * width);
+
     }
   }
 
   for (let x = 0; x < (board * board) / 2; x++) {
+
     randomHorHole.push(horGrid[getRandomNumber(horGrid.length)]);
-    square[randomHorHole[x]].classList.add("horHoles");
+    squares[randomHorHole[x]].classList.add("horHoles");
+
   }
 
   /* vertGrid's creation */
 
   for (let j = 0; j < width - 2 * trapBoard; j++) {
-    for (
-      let i = trapBoard + trapBoard * width;
-      i < trapBoard + trapBoard * width + width - 2 * trapBoard;
-      i++
-    ) {
+    for (let i = trapBoard + trapBoard * width; i < trapBoard + trapBoard * width + width - 2 * trapBoard; i++) {
+
       vertGrid.push(i + j * width);
+
     }
   }
 
   for (let x = 0; x < (board * board) / 2; x++) {
+
     randomVertHole.push(vertGrid[getRandomNumber(vertGrid.length)]);
-    square[randomVertHole[x]].classList.add("vertHoles");
+    squares[randomVertHole[x]].classList.add("vertHoles");
+
   }
 
   /* add cover */
 
-  const trapGrid = document.querySelectorAll(".trapBoard");
+  // const trapGrid = document.querySelectorAll(".trapBoard");
 
-  for (let i = 0; i < trapGrid.length; i++) {
-    trapGrid[i].classList.add("dot");
+  for (let i = 0; i < TrapBoard.length; i++) {
+
+    TrapBoard[i].classList.add("dot");
+
   }
 
   /* add controller */
@@ -107,10 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function fillContPosition(ranContPosition) {
     for (let i = 0; i < board; i++) {
+
       var contPosition = getRandomNumber(3);
       ranContPosition.push(contPosition);
+
     }
+
     return ranContPosition;
+
   }
 
   randomHorContPosition = fillContPosition(randomHorContPosition);
@@ -124,13 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let j = 0; j < border; j++) {
     for (let i = trapBoard; i < width - trapBoard; i++) {
-      vertCont.push(square[i + j * width]);
+
+      vertCont.push(squares[i + j * width]);
+
     }
   }
 
   for (let j = width - border; j < width; j++) {
     for (let i = trapBoard; i < width - trapBoard; i++) {
-      vertCont.push(square[i + j * width]);
+
+      vertCont.push(squares[i + j * width]);
+
     }
   }
 
@@ -138,22 +152,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let x = 0; x < board; x++) {
     if (randomVertContPosition[x] == 0) {
+
       vertCont[x].setAttribute("class", "red");
       vertCont[x + board].setAttribute("class", "red");
       vertCont[x + 2 * board].setAttribute("class", "red");
       vertCont[x + 3 * board].setAttribute("class", "red");
+
     }
     if (randomVertContPosition[x] == 1) {
+
       vertCont[x + board].setAttribute("class", "red");
       vertCont[x + 2 * board].setAttribute("class", "red");
       vertCont[x + 3 * board].setAttribute("class", "red");
       vertCont[x + 4 * board].setAttribute("class", "red");
+
     }
     if (randomVertContPosition[x] == 2) {
+
       vertCont[x + 2 * board].setAttribute("class", "red");
       vertCont[x + 3 * board].setAttribute("class", "red");
       vertCont[x + 4 * board].setAttribute("class", "red");
       vertCont[x + 5 * board].setAttribute("class", "red");
+
     }
   }
 
@@ -165,13 +185,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (x = 0; x < border; x++) {
     for (y = trapBoard * width; y < (width - trapBoard) * width; y += width) {
-      horCont.push(square[x + y]);
+
+      horCont.push(squares[x + y]);
+
     }
   }
 
   for (x = width - trapBoard + 1; x < width; x++) {
     for (y = trapBoard * width; y < (width - trapBoard) * width; y += width) {
-      horCont.push(square[x + y]);
+
+      horCont.push(squares[x + y]);
+
     }
   }
 
@@ -179,22 +203,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let x = 0; x < board; x++) {
     if (randomHorContPosition[x] == 0) {
+
       horCont[x].setAttribute("class", "yellow");
       horCont[x + board].setAttribute("class", "yellow");
       horCont[x + 2 * board].setAttribute("class", "yellow");
       horCont[x + 3 * board].setAttribute("class", "yellow");
+
     }
     if (randomHorContPosition[x] == 1) {
+
       horCont[x + board].setAttribute("class", "yellow");
       horCont[x + 2 * board].setAttribute("class", "yellow");
       horCont[x + 3 * board].setAttribute("class", "yellow");
       horCont[x + 4 * board].setAttribute("class", "yellow");
+
     }
     if (randomHorContPosition[x] == 2) {
+
       horCont[x + 2 * board].setAttribute("class", "yellow");
       horCont[x + 3 * board].setAttribute("class", "yellow");
       horCont[x + 4 * board].setAttribute("class", "yellow");
       horCont[x + 5 * board].setAttribute("class", "yellow");
+
     }
   }
 
@@ -204,20 +234,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let x = 0; x < vertCont.length; x++) {
     if (randomVertContPosition[x] == 0) {
-      vertCont[x + 4 * board].addEventListener("mousedown", moveVertHandler1 = () => {
+      vertCont[x + 4 * board].addEventListener("mousedown", () => {
         mouveVertCont(vertCont[x + 4 * board]);
       }, { once: true });
     }
     if (randomVertContPosition[x] == 1) {
-      vertCont[x].addEventListener("mousedown", moveVertHandler2 = () => {
+      vertCont[x].addEventListener("mousedown", () => {
         mouveVertCont(vertCont[x + 0 * board]);
       }, { once: true });
-      vertCont[x + 5 * board].addEventListener("mousedown", moveVertHandler3 = () => {
+      vertCont[x + 5 * board].addEventListener("mousedown", () => {
         mouveVertCont(vertCont[x + 5 * board]);
       }, { once: true });
     }
     if (randomVertContPosition[x] == 2) {
-      vertCont[x + 1 * board].addEventListener("mousedown", moveVertHandler4 = () => {
+      vertCont[x + 1 * board].addEventListener("mousedown", () => {
         mouveVertCont(vertCont[x + 1 * board]);
       }, { once: true });
     }
@@ -227,20 +257,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let x = 0; x < horCont.length; x++) {
     if (randomHorContPosition[x] == 0) {
-      horCont[x + 4 * board].addEventListener("mousedown", moveHorHandler1 = () => {
+      horCont[x + 4 * board].addEventListener("mousedown", () => {
         mouveHorCont(horCont[x + 4 * board]);
       }, { once: true });
     }
     if (randomHorContPosition[x] == 1) {
-      horCont[x].addEventListener("mousedown", moveHorHandler2 = () => {
+      horCont[x].addEventListener("mousedown", () => {
         mouveHorCont(horCont[x + 0 * board]);
       }, { once: true });
-      horCont[x + 5 * board].addEventListener("mousedown", moveHorHandler3 = () => {
+      horCont[x + 5 * board].addEventListener("mousedown", () => {
         mouveHorCont(horCont[x + 5 * board]);
       }, { once: true });
     }
     if (randomHorContPosition[x] == 2) {
-      horCont[x + 1 * board].addEventListener("mousedown", moveHorHandler4 = () => {
+      horCont[x + 1 * board].addEventListener("mousedown", () => {
         mouveHorCont(horCont[x + 1 * board]);
       }, { once: true });
     }
@@ -268,91 +298,196 @@ document.addEventListener("DOMContentLoaded", () => {
   function mouveHorCont(div) {
     /* left side */
     if (div.id % width < width / 2) {
-      console.log("left");
+      mouvHorLineLeft(Number(div.id));
     }
     /* right side */
     if (div.id % width > width / 2) {
-      console.log("right");
+      moveHorLineRight(Number(div.id));
     }
   }
-  
+
   /* mouvVertLineUp */
   function mouvVertLineUp(divid) {
     if (divid - width > 0) {
 
-      square[divid].classList.add("red");
+      squares[divid].classList.add("red");
 
-      square[divid - width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid - width]);
+      squares[divid - width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid - width]);
       }, { once: true });
 
-      square[divid + 13 * width].classList.remove("red");
+      squares[divid + 13 * width].classList.remove("red");
 
-      square[divid + 13 * width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid + 13 * width]);
+      squares[divid + 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid + 13 * width]);
       }, { once: true });
 
       for (let i = 2; i <= 12; i++) {
-        if (square[divid + i * width].classList.contains("vertHoles")) {
-          console.log("ok");
-          square[divid + i * width].classList.remove("vertHoles");
-          square[divid + (i - 1) * width].classList.add("vertHoles");
+        if (squares[divid + i * width].classList.contains("vertHoles")) {
+          squares[divid + i * width].classList.remove("vertHoles");
+          squares[divid + (i - 1) * width].classList.add("vertHoles");
         }
       }
-    }else{
-      square[divid].classList.add("red");
-      square[divid + 13 * width].classList.remove("red");
-      square[divid + 13 * width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid + 13 * width]);
+    } else {
+      squares[divid].classList.add("red");
+      squares[divid + 13 * width].classList.remove("red");
+      squares[divid + 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid + 13 * width]);
       }, { once: true });
-      
+
       for (let i = 2; i <= 12; i++) {
-        if (square[divid + i * width].classList.contains("vertHoles")) {
-          square[divid + i * width].classList.remove("vertHoles");
-          square[divid + (i - 1) * width].classList.add("vertHoles");
+        if (squares[divid + i * width].classList.contains("vertHoles")) {
+          squares[divid + i * width].classList.remove("vertHoles");
+          squares[divid + (i - 1) * width].classList.add("vertHoles");
         }
       }
     }
   }
-  
+
   /* mouvVertLineDown */
 
   function mouvVertLineDown(divid) {
     if (divid + width < 224) {
-      square[divid].classList.add("red");
+      squares[divid].classList.add("red");
 
-      square[divid + width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid + width]);
+      squares[divid + width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid + width]);
       }, { once: true });
 
-      square[divid - 13 * width].classList.remove("red");
+      squares[divid - 13 * width].classList.remove("red");
 
-      square[divid - 13 * width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid - 13 * width]);
+      squares[divid - 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid - 13 * width]);
       }, { once: true });
 
       for (let i = 1; i <= 12; i++) {
-        if(square[divid - i * width].classList.contains("vertHoles")){
-          square[divid - i * width].classList.remove("vertHoles");
-          square[divid - (i - 1) * width].classList.add("vertHoles");
+        if (squares[divid - i * width].classList.contains("vertHoles")) {
+          squares[divid - i * width].classList.remove("vertHoles");
+          squares[divid - (i - 1) * width].classList.add("vertHoles");
         }
       }
-    }else{
-      square[divid].classList.add("red");
-      square[divid - 13 * width].classList.remove("red");
-      square[divid - 13 * width].addEventListener("mousedown", () => {
-        mouveVertCont(square[divid - 13 * width]);
+    } else {
+      squares[divid].classList.add("red");
+      squares[divid - 13 * width].classList.remove("red");
+      squares[divid - 13 * width].addEventListener("mousedown", () => {
+        mouveVertCont(squares[divid - 13 * width]);
       }, { once: true });
-      
+
       for (let i = 1; i <= 12; i++) {
-        if(square[divid - i * width].classList.contains("vertHoles")){
-          square[divid - i * width].classList.remove("vertHoles");
-          square[divid - (i - 1) * width].classList.add("vertHoles");
+        if (squares[divid - i * width].classList.contains("vertHoles")) {
+          squares[divid - i * width].classList.remove("vertHoles");
+          squares[divid - (i - 1) * width].classList.add("vertHoles");
         }
       }
     }
   }
+
+  /* mouvHorLineRight */
+
+  function moveHorLineRight(divid) {
+    if (divid % width == 13) {
+      squares[divid].classList.add("yellow");
+      squares[divid + 1].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid + 1]);
+      }, { once: true });
+      squares[divid - 13].classList.remove("yellow");
+      squares[divid - 13].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid - 13]);
+      }, { once: true });
+
+      for (let i = 1; i <= 12; i++) {
+        if (squares[divid - i].classList.contains("horHoles")) {
+          squares[divid - i].classList.remove("horHoles");
+          squares[divid - (i - 1)].classList.add("horHoles");
+        }
+      }
+
+    }
+    else {
+      squares[divid].classList.add("yellow");
+      squares[divid - 13].classList.remove("yellow");
+      squares[divid - 13].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid - 13]);
+      }, { once: true });
+
+      for (let i = 1; i <= 12; i++) {
+        if (squares[divid - i].classList.contains("horHoles")) {
+          squares[divid - i].classList.remove("horHoles");
+          squares[divid - (i - 1)].classList.add("horHoles");
+        }
+      }
+    }
+  }
+
+  /* mouvHorLineLeft */
+
+  function mouvHorLineLeft(divid) {
+    if (divid % width == 1) {
+      
+      squares[divid].classList.add("yellow");
+      squares[divid - 1].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid - 1]);
+      }, { once: true });
+      squares[divid + 13].classList.remove("yellow");
+      squares[divid + 13].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid + 13]);
+      }, { once: true });
+
+      for (let i = 1; i <= 12; i++) {
+        if (squares[divid + i].classList.contains("horHoles")) {
+          squares[divid + i].classList.remove("horHoles");
+          squares[divid + (i - 1)].classList.add("horHoles");
+        }
+      }
+    } else {
+      squares[divid].classList.add("yellow");
+      squares[divid + 13].classList.remove("yellow");
+      squares[divid + 13].addEventListener("mousedown", () => {
+        mouveHorCont(squares[divid + 13]);
+      }, { once: true });
+
+      for (let i = 1; i <= 12; i++) {
+        if (squares[divid + i].classList.contains("horHoles")) {
+          squares[divid + i].classList.remove("horHoles");
+          squares[divid + (i - 1)].classList.add("horHoles");
+        }
+      }
+    }
+  }
+
+  /* add marble to the board */
+
+  const Marble = document.createElement("canvas");
   
+  Marble.width = 20;
+  Marble.height = 20;
+  
+  const marbleCtx = Marble.getContext("2d");
+  marbleCtx.fillStyle = "yellow";
+  marbleCtx.beginPath();
+  marbleCtx.arc(10, 10, 6, 0, Math.PI * 2, true);
+  marbleCtx.fill();
+  
+  squares[100].appendChild(Marble);
+  // const redMarble = document.createElement("canvas");
+
+  // redMarble.width = 20;
+  // redMarble.height = 20;
+  
+  // const redCtx = redMarble.getContext("2d");
+  // yellowCtx.beginPath();
+  // yellowCtx.fillStyle = "red";
+  // yellowCtx.arc(10, 10, 6, 0, Math.PI * 2, true);
+  // yellowCtx.fill();
+  
+  // squares[99].appendChild(yellowMarble);
+  // squares[98].appendChild(YellowMarble);
+  // squares[97].appendChild(redMarble);
+  // squares[96].appendChild(YellowMarble);
+  // squares[95].appendChild(redMarble);
+  
+
+
 
 
 });
