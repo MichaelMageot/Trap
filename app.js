@@ -458,10 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* add marble to the board */
 
   const Marble = document.createElement("canvas");
-  
-  Marble.width = 20;
-  Marble.height = 20;
-  
+    
   const marbleCtx = Marble.getContext("2d");
   marbleCtx.fillStyle = "yellow";
   marbleCtx.beginPath();
@@ -469,22 +466,16 @@ document.addEventListener("DOMContentLoaded", () => {
   marbleCtx.fill();
   
   squares[100].appendChild(Marble);
-  // const redMarble = document.createElement("canvas");
-
-  // redMarble.width = 20;
-  // redMarble.height = 20;
   
-  // const redCtx = redMarble.getContext("2d");
-  // yellowCtx.beginPath();
-  // yellowCtx.fillStyle = "red";
-  // yellowCtx.arc(10, 10, 6, 0, Math.PI * 2, true);
-  // yellowCtx.fill();
+  const Marble1 = document.createElement("canvas");
+    
+  const marbleCtx1 = Marble1.getContext("2d");
+  marbleCtx1.fillStyle = "yellow";
+  marbleCtx1.beginPath();
+  marbleCtx1.arc(10, 10, 6, 0, Math.PI * 2, true);
+  marbleCtx1.fill();
   
-  // squares[99].appendChild(yellowMarble);
-  // squares[98].appendChild(YellowMarble);
-  // squares[97].appendChild(redMarble);
-  // squares[96].appendChild(YellowMarble);
-  // squares[95].appendChild(redMarble);
+  squares[99].appendChild(Marble1);
   
 
 
