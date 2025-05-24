@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
   var vertGrid = [];
   var randomVertHole = [];
   var randomHorHole = [];
-  
+
   const Board = [];
   const TrapBoard = [];
-   
+
   function getRandomNumber(number) {
     return Math.floor(Math.random() * number);
   }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       squares[i + j * width].setAttribute("class", "board");
       Board.push(squares[i + j * width]);
-      
+
 
     }
   }
@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function mouvHorLineLeft(divid) {
     if (divid % width == 1) {
-      
+
       squares[divid].classList.add("yellow");
       squares[divid - 1].addEventListener("mousedown", () => {
         mouveHorCont(squares[divid - 1]);
@@ -457,28 +457,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* add marble to the board */
 
-  const Marble = document.createElement("canvas");
-    
-  const marbleCtx = Marble.getContext("2d");
-  marbleCtx.fillStyle = "yellow";
-  marbleCtx.beginPath();
-  marbleCtx.arc(10, 10, 6, 0, Math.PI * 2, true);
-  marbleCtx.fill();
-  
-  squares[100].appendChild(Marble);
-  
-  const Marble1 = document.createElement("canvas");
-    
-  const marbleCtx1 = Marble1.getContext("2d");
-  marbleCtx1.fillStyle = "yellow";
-  marbleCtx1.beginPath();
-  marbleCtx1.arc(10, 10, 6, 0, Math.PI * 2, true);
-  marbleCtx1.fill();
-  
-  squares[99].appendChild(Marble1);
-  
+  function addMarble(squareNumb, color) {
+    const Marble = document.createElement("canvas");
+    Marble.innerHTML = "Canvas is not supported";
+    Marble.setAttribute("class", "canvas " + color);
+    Marble.setAttribute("width", "20");
+    Marble.setAttribute("height", "20");
 
 
+    const marbleCtx = Marble.getContext("2d");
+    marbleCtx.fillStyle = color;
+    marbleCtx.beginPath();
+    marbleCtx.arc(10, 10, 4, 0, Math.PI * 2, true);
+    marbleCtx.fill();
+
+    squares[squareNumb].appendChild(Marble);
+  }
+
+  let randomNumber1
+  let randomNumber2
+
+
+  for (let j = 0; j < 5; j++) {
+    randomNumber1 = getRandomNumber(49)
+    randomNumber2 = getRandomNumber(49)
+
+    while (randomNumber1 == randomNumber2) {
+      randomNumber2 = getRandomNumber(49);
+    }
+
+    console.log(randomNumber1);
+    console.log(randomNumber2);
+
+    addMarble(TrapBoard[randomNumber1].id, "rgb(255, 237, 80)");
+    addMarble(TrapBoard[randomNumber2].id, "rgb(31, 236, 243)");
+  }
 
 
 });
